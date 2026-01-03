@@ -1,33 +1,13 @@
 package sql
 
-import org.apache.spark.sql.SparkSession
-
-import java.io.File
+import utils.SparkHelper._
 
 object InsertOrcTable {
   def main(args: Array[String]): Unit = {
     println(util.Properties.versionString)  // Scala runtime
     println(org.apache.spark.SPARK_VERSION) // Spark version
 
-    val warehouseLocation = new File("spark-warehouse").getAbsolutePath
-
-    val log4jConf =
-      "-Dlog4j.configurationFile=/Users/tan.vu/github/LearningSparkV2/chapter2/scala/src/main/resources/log4j2.properties"
-
-    val addOpens =
-      "--add-opens=java.base/java.net=ALL-UNNAMED"
-
-    val driverOpts   = s"$addOpens $log4jConf"
-    val executorOpts = s"$addOpens $log4jConf"
-
-    val spark = SparkSession.builder
-      .appName("InsertOrcTable")
-      .master("local[4]")
-      .config("spark.sql.warehouse.dir", warehouseLocation)
-      .config("spark.driver.extraJavaOptions", driverOpts)
-      .config("spark.executor.extraJavaOptions", executorOpts)
-      .enableHiveSupport()
-      .getOrCreate()
+    val spark = createSparkSession(appName = "InsertOrcTable", master = "local[*]")
 
     spark.sql("CREATE DATABASE IF NOT EXISTS spark_db")
     spark.sql("USE spark_db")
@@ -49,7 +29,7 @@ object InsertOrcTable {
     result.show(false)
 
     // Stop the Spark session
-//    Thread.sleep(100000) // Sleep for 100 seconds
+    Thread.sleep(100000) // Sleep for 100 seconds
     spark.stop()
   }
 
