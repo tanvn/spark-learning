@@ -8,15 +8,7 @@ object InsertOrcTable {
   def main(args: Array[String]): Unit = {
     println(util.Properties.versionString)  // Scala runtime
     println(org.apache.spark.SPARK_VERSION) // Spark version
-    println(
-      "MurmurHash3 loaded from: " +
-        classOf[scala.util.hashing.MurmurHash3.type].getProtectionDomain.getCodeSource.getLocation
-    )
 
-    println(
-      "scala.Predef loaded from: " +
-        scala.Predef.getClass.getProtectionDomain.getCodeSource.getLocation
-    )
     val warehouseLocation = new File("spark-warehouse").getAbsolutePath
 
     val log4jConf =
@@ -57,7 +49,7 @@ object InsertOrcTable {
     result.show(false)
 
     // Stop the Spark session
-    Thread.sleep(100000) // Sleep for 100 seconds
+//    Thread.sleep(100000) // Sleep for 100 seconds
     spark.stop()
   }
 
