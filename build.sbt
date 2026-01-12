@@ -2,7 +2,7 @@ import scala.collection.Seq
 
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
-ThisBuild / scalaVersion := "2.13.18"
+ThisBuild / scalaVersion := "2.12.18"
 
 ThisBuild / evictionErrorLevel := Level.Error
 
@@ -13,7 +13,7 @@ lazy val root = (project in file("."))
   )
 
 // spark library dependencies
-val sparkVersion = "4.1.0"
+val sparkVersion = "3.4.4"
 
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % sparkVersion,
