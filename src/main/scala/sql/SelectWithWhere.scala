@@ -12,6 +12,9 @@ object SelectWithWhere {
     df.explain(true)
 
     df.show(10, truncate = false)
+    Thread.sleep(60 * 1000 * 5) // Sleep for 5 minutes so that we can check the Spark UI
+    // Stop the Spark session
+    spark.stop()
 
   }
 
